@@ -1,0 +1,24 @@
+
+@startuml "auth_request_sequence"
+
+participant Request as Admin
+participant EndpointCarOwners as EndpointCarOwners
+control RequestAuthCntrl as RequestAuthCntrl
+participant APP as APP
+database DB as DB
+
+Admin -> EndpointCarOwners: Admin access Endpoint Car Owners
+alt successful case
+    EndpointCarOwners -> RequestAuthCntrl: Check Authentication
+    RequestAuthCntrl -> APP: Authentication Accepted
+    APP -> DB: App access db
+    DB -> APP: back response
+    APP -> EndpointCarOwners: back response
+    EndpointCarOwners -> Admin: back response
+else Authentication not accepted
+    EndpointCarOwners -> RequestAuthCntrl: Check Authentication
+    RequestAuthCntrl -> EndpointCarOwners: Authentication NOT Accepted
+    EndpointCarOwners -> Admin: back response
+end
+@enduml
+

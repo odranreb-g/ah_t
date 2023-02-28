@@ -1,0 +1,36 @@
+@startuml "carford_car_shop_database"
+package "Carford car shop Database" <<Database>> {
+enum Color
+enum Model
+class Car{
+  {field} id: uuid4
+  {field} color: small positive integer (Not Null)
+  {field} model: small positive integer (Not Null)
+  {field} created_at: datetime (Not Null)
+  {field} updated_at: datetime (Not Null)
+  {field} is_deleted: bool (Not Null, default False)
+}
+class CarOwner{
+  {field} id: uuid4
+  {field} sale_opportunity: bool (default True)
+}
+
+Color "1..1" --* "0..*" Car : has color
+Model "1..1" --* "0..*" Car : has model
+Car "0..3" -- "1..1" CarOwner : < owns
+}
+note left of Car::color
+  The system must have validation at webapp 
+  and database (check constraint) 
+  to avoid changes via database.
+  This condition is the same to model.
+end note
+
+note "The system must have validation at webapp and \ndatabase (trigger) to avoid changes via database." as Max3CarRestriction
+
+Max3CarRestriction .. Car
+CarOwner .. Max3CarRestriction
+
+@enduml
+
+

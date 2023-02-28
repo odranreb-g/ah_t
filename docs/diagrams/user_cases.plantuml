@@ -1,0 +1,18 @@
+@startuml "use_cases_endpoints"
+left to right direction
+actor "Admin with auth" as admin
+actor "Admin without auth or guests" as guest
+
+
+rectangle "Carford car shop :: system" {
+  usecase UC1 as "Car Owners
+==
+This endpoint admin can \ncreate, edit\nand use soft delete."
+  usecase UC2 as "Car
+==
+This endpoint admin can \ncreate, edit\nand use soft delete."
+}
+admin --> UC1
+admin --> UC2
+note right of guest : Person without credentials cant use the system.
+@enduml
