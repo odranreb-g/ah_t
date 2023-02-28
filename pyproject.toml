@@ -13,8 +13,24 @@ uvicorn = {extras = ["standard"], version = "^0.20.0"}
 
 
 [tool.poetry.group.dev.dependencies]
-pre-commit = "^3.1.1"
-pytest = "^7.2.1"
+pre-commit = ">=3.1.1"
+pytest = ">=7.2.1"
+pytest-cov = ">=4.0.0"
+
+[tool.poetry.group.code-quality.dependencies]
+black = ">=22.10.0"
+flake8 = ">=5.0.4"
+bandit = ">=1.7.4"
+isort = ">=5.10.1"
+safety = ">=2.3.1"
+
+[tool.isort]
+profile = "black"
+atomic = true
+
+[tool.black]
+line-length = 110
+target-version = ['py311']
 
 [build-system]
 requires = ["poetry-core"]

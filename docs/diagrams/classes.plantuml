@@ -20,8 +20,8 @@ Model "1..1" --* "0..*" Car : has model
 Car "0..3" -- "1..1" CarOwner : < owns
 }
 note left of Car::color
-  The system must have validation at webapp 
-  and database (check constraint) 
+  The system must have validation at webapp
+  and database (check constraint)
   to avoid changes via database.
   This condition is the same to model.
 end note
@@ -32,5 +32,3 @@ Max3CarRestriction .. Car
 CarOwner .. Max3CarRestriction
 
 @enduml
-
-

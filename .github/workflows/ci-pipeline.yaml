@@ -1,0 +1,43 @@
+name: Python Lint
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install poetry
+        run: pipx install poetry
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          cache: "poetry"
+      - name: Install dependencies
+        run: poetry install
+      - name: Run tests
+        run: poetry run pytest ah_t --cov=ah_t/ --cov-report=xml
+  code-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install poetry
+        run: pipx install poetry
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          cache: "poetry"
+      - name: Install dependencies
+        run: poetry install
+      - name: Run Flake8
+        run: poetry run flake8 . --max-line-length 110
+      - name: Run Black
+        run: poetry run black . --check
+      - name: Run Isort
+        run: poetry run isort . --check-only
+      - name: Run Bandit
+        run: poetry run bandit .
+      - name: Run saftey
+        run: poetry run safety check
