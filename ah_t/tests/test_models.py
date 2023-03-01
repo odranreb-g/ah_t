@@ -1,5 +1,6 @@
 import pytest
 from sqlalchemy import Engine, create_engine
+from sqlalchemy.exc import DataError
 
 from ah_t.config import settings
 from ah_t.constants import ColorEnum, ModelEnum
@@ -45,3 +46,21 @@ class TestCar:
         assert car.is_deleted is False
         assert car.color is ColorEnum.BLUE
         assert car.model is ModelEnum.CONVERTIBLE
+
+    def test_set_wrong_color(self, db):
+        car_owner = CarOwner()
+        db.add(car_owner)
+        db.commit()
+        car = Car(car_owner_id=car_owner.id, color="black", model=ModelEnum.CONVERTIBLE)
+        db.add(car)
+        with pytest.raises(DataError, match='invalid input value for enum colorenum: "black"'):
+            db.commit()
+
+    def test_set_wrong_model(self, db):
+        car_owner = CarOwner()
+        db.add(car_owner)
+        db.commit()
+        car = Car(car_owner_id=car_owner.id, color=ColorEnum.BLUE, model="New model")
+        db.add(car)
+        with pytest.raises(DataError, match='invalid input value for enum modelenum: "New model"'):
+            db.commit()

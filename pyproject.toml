@@ -8,12 +8,12 @@ packages = [{include = "ah_t"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
-fastapi = "^0.92.0"
-uvicorn = {extras = ["standard"], version = "^0.20.0"}
-sqlalchemy = "^2.0.4"
-alembic = "^1.9.4"
-pydantic = "^1.10.5"
-psycopg2 = "^2.9.5"
+fastapi = ">=0.92.0"
+uvicorn = {extras = ["standard"], version = ">=0.20.0"}
+sqlalchemy = ">=2.0.4"
+alembic = ">=1.9.4"
+pydantic = ">=1.10.5"
+psycopg2 = ">=2.9.5"
 
 
 [tool.poetry.group.dev.dependencies]
