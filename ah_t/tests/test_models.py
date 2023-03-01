@@ -1,6 +1,6 @@
 import pytest
 from sqlalchemy import Engine, create_engine
-from sqlalchemy.exc import DataError
+from sqlalchemy.exc import DataError, InternalError
 
 from ah_t.config import settings
 from ah_t.constants import ColorEnum, ModelEnum
@@ -64,3 +64,23 @@ class TestCar:
         db.add(car)
         with pytest.raises(DataError, match='invalid input value for enum modelenum: "New model"'):
             db.commit()
+
+    def test_car_owner_can_just_have_3_cars(self, db) -> None:
+        car_owner = CarOwner()
+        db.add(car_owner)
+        db.commit()
+        for _ in range(4):
+            car = Car(car_owner_id=car_owner.id, color=ColorEnum.BLUE, model=ModelEnum.CONVERTIBLE)
+            db.add(car)
+        with pytest.raises(InternalError, match="Limit quantity car reached"):
+            db.commit()
+
+    def test_car_multiples_owner_can_have_3_cars(self, db) -> None:
+        for _ in range(4):
+            car_owner = CarOwner()
+            db.add(car_owner)
+            db.commit()
+            for _ in range(3):
+                car = Car(car_owner_id=car_owner.id, color=ColorEnum.BLUE, model=ModelEnum.CONVERTIBLE)
+                db.add(car)
+        db.commit()
