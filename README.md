@@ -21,7 +21,7 @@
     - [ ] Endpoint cars
         - [ ] Cars cannot exist in the system without owners.
         - [ ] Car Colors possibility | ‘yellow’, ‘blue’ or ‘gray’
-        - [ ] Car Models possibility | hatch’, ‘sedan’ or ‘convertible’
+        - [ ] Car Models possibility | ‘hatch’, ‘sedan’ or ‘convertible’
 
 ## Tests
 

@@ -10,6 +10,14 @@ services:
     env_file: .env
     networks:
       - app-network
+  adminer:
+    image: adminer
+    ports:
+      - 8081:8080
+    depends_on:
+      - db
+    networks:
+      - app-network
 volumes:
   ah_t_data:
 
