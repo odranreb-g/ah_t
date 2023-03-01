@@ -1,8 +1,8 @@
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI
 
-app = FastAPI()
+from ah_t.dependencies import get_token_header
+from ah_t.routers import car_owners
 
+app = FastAPI(dependencies=[Depends(get_token_header)])
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
+app.include_router(car_owners.router, prefix="/car-owners")
