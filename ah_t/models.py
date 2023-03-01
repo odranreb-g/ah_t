@@ -1,6 +1,6 @@
-from uuid import uuid4
+from uuid import UUID, uuid4
 
-from sqlalchemy import Boolean, Column, DateTime, Enum, ForeignKey, Uuid
+from sqlalchemy import Boolean, Column, DateTime, Enum, ForeignKey, String, Uuid
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
@@ -8,7 +8,7 @@ from .constants import ColorEnum, ModelEnum
 from .database import Base
 
 
-def generate_uuid():
+def generate_uuid() -> UUID:
     return uuid4()
 
 
@@ -29,6 +29,7 @@ class CarOwner(Base):
     )
 
     is_deleted = Column(Boolean, default=False, nullable=False, comment="private | store if row was deleted")
+    name = Column(String, nullable=False, comment="public | car owner name")
 
     cars = relationship("Car", back_populates="car_owner")
 

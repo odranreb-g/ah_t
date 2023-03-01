@@ -39,6 +39,7 @@ def upgrade() -> None:
             comment="private | updated_at",
         ),
         sa.Column("is_deleted", sa.Boolean(), nullable=False, comment="private | store if row was deleted"),
+        sa.Column("name", sa.String(), nullable=False, comment="public | car owner name"),
         sa.PrimaryKeyConstraint("id"),
     )
     op.create_table(
