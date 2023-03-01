@@ -27,7 +27,7 @@ def db(engine_fixture: Engine):
 
 
 class TestCarOwner:
-    def test_model(self, db):
+    def test_model(self, db) -> None:
         car_owner = CarOwner()
         db.add(car_owner)
         db.commit()
@@ -36,7 +36,7 @@ class TestCarOwner:
 
 
 class TestCar:
-    def test_model(self, db):
+    def test_model(self, db) -> None:
         car_owner = CarOwner()
         db.add(car_owner)
         db.commit()
@@ -47,7 +47,7 @@ class TestCar:
         assert car.color is ColorEnum.BLUE
         assert car.model is ModelEnum.CONVERTIBLE
 
-    def test_set_wrong_color(self, db):
+    def test_set_wrong_color(self, db) -> None:
         car_owner = CarOwner()
         db.add(car_owner)
         db.commit()
@@ -56,7 +56,7 @@ class TestCar:
         with pytest.raises(DataError, match='invalid input value for enum colorenum: "black"'):
             db.commit()
 
-    def test_set_wrong_model(self, db):
+    def test_set_wrong_model(self, db) -> None:
         car_owner = CarOwner()
         db.add(car_owner)
         db.commit()
