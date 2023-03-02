@@ -7,10 +7,10 @@ from sqlalchemy.orm import Session
 from ah_t.database import get_db
 from ah_t.models import CarOwner
 from ah_t.schemas import (
-    CarOwneraginationchema,
     CarOwnerInPartialUpdateSchema,
     CarOwnerInSchema,
     CarOwnerOutSchema,
+    CarOwnerPaginationchema,
 )
 
 router = APIRouter()
@@ -55,10 +55,10 @@ async def partial_update_car_owner(
     return car_owner
 
 
-@router.get("/", response_model=CarOwneraginationchema)
+@router.get("/", response_model=CarOwnerPaginationchema)
 async def list_car_owners(
     request: Request, offset: int = 0, limit: int = 100, db: Session = Depends(get_db)
-) -> CarOwnerInSchema:
+) -> CarOwnerPaginationchema:
     count = db.query(CarOwner).count()
 
     response = {

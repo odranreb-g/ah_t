@@ -63,3 +63,4 @@ class Car(Base):
         comment="private | updated_at",
     )
     is_deleted = Column(Boolean, default=False, nullable=False, comment="private | store if row was deleted")
+    license_plate = Column(String(7), nullable=False, unique=True, comment="public | car owner name")
