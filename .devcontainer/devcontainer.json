@@ -1,0 +1,63 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/postgres
+{
+    "name": "Python 3 & PostgreSQL",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "app",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+    // Features to add to the dev container. More info: https://containers.dev/features.
+    // "features": {},
+    "forwardPorts": [
+        8000,
+        8080
+    ],
+    // Configure tool-specific properties.
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "[python]": {
+                    "editor.codeActionsOnSave": {
+                        "source.organizeImports": true
+                    },
+                    "editor.defaultFormatter": "ms-python.black-formatter",
+                    "editor.formatOnSave": true,
+                    "editor.formatOnType": true
+                },
+                "editor.suggestSelection": "first",
+                "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+                "python.linting.enabled": true,
+                "python.linting.pylintEnabled": false,
+                "python.linting.flake8Enabled": true,
+                "python.linting.flake8Args": [
+                    "--ignore=E203",
+                    "--max-line-length=110"
+                ],
+                "python.terminal.activateEnvironment": false,
+                "python.analysis.inlayHints.functionReturnTypes": true,
+                "python.analysis.autoImportCompletions": true,
+                "python.formatting.provider": "none",
+                "python.formatting.blackArgs": [
+                    "--line-length",
+                    "110"
+                ],
+                "python.testing.pytestArgs": [],
+                "python.testing.unittestEnabled": false,
+                "python.testing.pytestEnabled": false,
+                "python.analysis.inlayHints.pytestParameters": true,
+                "workbench.colorTheme": "Monokai"
+            },
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-python.isort",
+                "ms-python.black-formatter"
+            ]
+        }
+    },
+    "postCreateCommand": "poetry install && poetry run pre-commit install",
+    "remoteUser": "vscode",
+    "mounts": [
+        "source=profile,target=/root,type=volume",
+        "target=/root/.vscode-server,type=volume"
+    ]
+}
