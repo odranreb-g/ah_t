@@ -55,6 +55,7 @@
         }
     },
     "postCreateCommand": "poetry install && poetry run pre-commit install",
+    "postAttachCommand": "poetry run alembic upgrade head",
     "remoteUser": "vscode",
     "mounts": [
         "source=profile,target=/root,type=volume",

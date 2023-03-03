@@ -58,6 +58,21 @@ Inside dev container execute :
 ```bash
 poetry run uvicorn ah_t.main:app --reload
 ```
+## Requests Exemples
+
+```bash
+curl --location --request GET 'http://127.0.0.1:8000/cars/' \
+--header 'X-Token: fake-super-secret-token' \
+--header 'Content-Type: application/json' \
+--data-raw '{"sale_opportunity": true, "name": "JO1A", "is_deleted":true}'
+```
+
+```bash
+curl --location --request GET 'http://127.0.0.1:8000/car-owners/' \
+--header 'X-Token: fake-super-secret-token' \
+--header 'Content-Type: application/json' \
+--data-raw '{"sale_opportunity": true, "name": "JO1A", "is_deleted":true}'
+```
 
 ## API Documentations
 
