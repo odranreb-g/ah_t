@@ -62,16 +62,12 @@ poetry run uvicorn ah_t.main:app --reload
 
 ```bash
 curl --location --request GET 'http://127.0.0.1:8000/cars/' \
---header 'X-Token: fake-super-secret-token' \
---header 'Content-Type: application/json' \
---data-raw '{"sale_opportunity": true, "name": "JO1A", "is_deleted":true}'
+--header 'X-Token: fake-super-secret-token'
 ```
 
 ```bash
 curl --location --request GET 'http://127.0.0.1:8000/car-owners/' \
---header 'X-Token: fake-super-secret-token' \
---header 'Content-Type: application/json' \
---data-raw '{"sale_opportunity": true, "name": "JO1A", "is_deleted":true}'
+--header 'X-Token: fake-super-secret-token'
 ```
 
 ## API Documentations
